@@ -20,7 +20,8 @@ export default {
   props: ["title"],
   data() {
     return {
-      width: null
+      width: null,
+      mounted: false
     };
   },
   inject: ["carousel"],
@@ -33,9 +34,12 @@ export default {
       this.carousel.isTouch ? "touchend" : "mouseup",
       this.onTouchEnd
     );
+    
+    this.mounted = true;
   },
   computed: {
     activeSlides() {
+      const mounted = this.mounted
       const { currentPage, breakpointSlidesPerPage, $children } = this.carousel;
       const activeSlides = [];
       const children = $children
